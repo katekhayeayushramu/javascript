@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIT Nagpur - Student Information</title>
+  <style>
+    :root {
+      --blue: #115288;
+      --surface: #ffffff;
+      --bg: #edf5ff;
+      --text: #172d46;
+      --muted: #5a7188;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e5f2ff, #f8fbff);
+      color: var(--text);
+    }
+
+    .page-wrapper {
+      width: min(980px, 92%);
+      margin: 0 auto;
+      padding: 28px 0 40px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .student-logo {
+      width: 86px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 18px;
+      background: #ffffff;
+      padding: 8px;
+      box-shadow: 0 14px 30px rgba(17, 82, 136, 0.16);
+    }
+
+    .student-heading {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3.5vw, 2.4rem);
+      letter-spacing: 0.02em;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 24px 60px rgba(17, 82, 136, 0.12);
+      border: 1px solid rgba(17, 82, 136, 0.06);
+    }
+
+    .details {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+      color: var(--text);
+    }
+
+    .details th,
+    .details td {
+      padding: 16px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .details th {
+      width: 180px;
+      font-weight: 700;
+      color: var(--blue);
+      border-bottom: 1px solid #e5ecf5;
+    }
+
+    .details td {
+      border-bottom: 1px solid #eef4fb;
+      color: #42586d;
+    }
+
+    .details tr:last-child th,
+    .details tr:last-child td {
+      border-bottom: none;
+    }
+
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: #f8fbff;
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 26px;
+      border: 1px solid rgba(17, 82, 136, 0.12);
+      box-shadow: 0 18px 40px rgba(17, 82, 136, 0.08);
+    }
+
+    .male-avatar {
+      position: relative;
+      width: 150px;
+      height: 240px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 10px;
+    }
+
+    .male-head {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: #f7d4b5;
+      border: 5px solid rgba(17, 82, 136, 0.16);
+      box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.06), 0 18px 40px rgba(17, 82, 136, 0.08);
+      overflow: hidden;
+    }
+
+    .male-head::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #3a2f24;
+      border-bottom-left-radius: 60% 40%;
+      border-bottom-right-radius: 60% 40%;
+    }
+
+    .male-head::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 24px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.08), transparent);
+    }
+
+    .male-eye {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      top: 56px;
+      box-shadow: inset 0 0 0 2px rgba(17, 82, 136, 0.18);
+    }
+
+    .male-eye::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #2e1f15;
+      border-radius: 50%;
+      top: 4px;
+      left: 4px;
+    }
+
+    .male-eye.left {
+      left: 32px;
+    }
+
+    .male-eye.right {
+      right: 32px;
+    }
+
+    .male-nose {
+      position: absolute;
+      top: 84px;
+      left: 50%;
+      width: 20px;
+      height: 24px;
+      background: #d99d73;
+      border-radius: 50% 50% 40% 40%;
+      transform: translateX(-50%);
+      box-shadow: inset 0 2px 0 rgba(0,0,0,0.06);
+    }
+
+    .male-mouth {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      width: 40px;
+      height: 14px;
+      border-radius: 0 0 40px 40px;
+      border-bottom: 4px solid rgba(50, 24, 10, 0.25);
+      transform: translateX(-50%);
+    }
+
+    .male-brow {
+      position: absolute;
+      width: 34px;
+      height: 10px;
+      background: #2e1f15;
+      border-radius: 12px;
+      top: 44px;
+    }
+
+    .male-brow.left {
+      left: 26px;
+      transform: rotate(-6deg);
+    }
+
+    .male-brow.right {
+      right: 26px;
+      transform: rotate(6deg);
+    }
+
+    .male-collar {
+      position: absolute;
+      top: 120px;
+      left: 50%;
+      width: 152px;
+      height: 42px;
+      transform: translateX(-50%);
+      background: #eef7ff;
+      border-radius: 0 0 26px 26px;
+      box-shadow: inset 0 4px 0 rgba(17, 82, 136, 0.08);
+      z-index: 1;
+    }
+
+    .male-collar::before,
+    .male-collar::after {
+      content: "";
+      position: absolute;
+      width: 52px;
+      height: 28px;
+      background: #eef7ff;
+      top: 0;
+      border-radius: 0 0 24px 24px;
+      border: 1px solid rgba(17, 82, 136, 0.12);
+    }
+
+    .male-collar::before {
+      left: -8px;
+      transform: rotate(12deg);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 70%);
+    }
+
+    .male-collar::after {
+      right: -8px;
+      transform: rotate(-12deg);
+      clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+    }
+
+    .male-shirt {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 170px;
+      height: 110px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #2e6c9a, #1f4f78);
+      border-radius: 24px 24px 18px 18px;
+      box-shadow: 0 16px 30px rgba(17, 82, 136, 0.18);
+      overflow: hidden;
+    }
+
+    .male-shirt::before {
+      content: "";
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      width: 86px;
+      height: 34px;
+      transform: translateX(-50%);
+      background: #eef7ff;
+      border-radius: 18px 18px 12px 12px;
+      z-index: 2;
+    }
+
+    .male-shirt::after {
+      content: "";
+      position: absolute;
+      top: 42px;
+      left: 50%;
+      width: 20px;
+      height: 44px;
+      transform: translateX(-50%);
+      background: #1f4f78;
+      border-radius: 12px 12px 0 0;
+      z-index: 2;
+    }
+
+    .male-tie {
+      position: absolute;
+      top: 58px;
+      left: 50%;
+      width: 24px;
+      height: 38px;
+      transform: translateX(-50%);
+      background: #e05b3a;
+      clip-path: polygon(50% 0%, 100% 40%, 60% 100%, 40% 100%, 0% 40%);
+      z-index: 3;
+    }
+
+    .profile-details h2 {
+      margin: 0;
+      font-size: 1.75rem;
+      color: var(--blue);
+    }
+
+    .profile-role {
+      margin: 10px 0 0;
+      color: #3a506b;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .profile-details p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .button-back {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(17, 82, 136, 0.18);
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      max-width: 320px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.94);
+      color: #fff;
+      font-size: 0.95rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 720px) {
+      header {
+        align-items: flex-start;
+      }
+
+      .details th {
+        width: auto;
+      }
+    }
+  </style>
+</head>
+<body class="student-page">
+  <div class="page-wrapper">
+    <header>
+      <div class="student-heading">
+        <img src="sit_logo.png" alt="SIT Nagpur Logo" class="student-logo">
+        <div>
+          <h1>Student Information</h1>
+          <p>Quick profile details for the student enrolled in the Computer Science and Engineering department.</p>
+        </div>
+      </div>
+      <a href="department.html" class="button-back clickable" data-toast="Going back to Department...">← Back to Department</a>
+    </header>
+
+    <section class="profile-card">
+      <div class="male-avatar">
+        <div class="male-head">
+          <span class="male-brow left"></span>
+          <span class="male-brow right"></span>
+          <span class="male-eye left"></span>
+          <span class="male-eye right"></span>
+          <span class="male-nose"></span>
+          <span class="male-mouth"></span>
+        </div>
+        <div class="male-collar"></div>
+        <div class="male-shirt"></div>
+        <div class="male-tie"></div>
+      </div>
+      <div class="profile-details">
+        <h2>Ayush Katekhaye</h2>
+        <p class="profile-role">Full Stack Java Developer</p>
+        <p>5th Semester | Computer Science and Engineering student at Symbiosis Institute of Technology, Nagpur.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <table class="details">
+        <tr>
+          <th>Name</th>
+          <td>Ayush Katekhaye</td>
+        </tr>
+        <tr>
+          <th>PRN</th>
+          <td>24070521161</td>
+        </tr>
+        <tr>
+          <th>Department</th>
+          <td>Computer Science and Engineering</td>
+        </tr>
+        <tr>
+          <th>Semester</th>
+          <td>5th Semester</td>
+        </tr>
+        <tr>
+          <th>College</th>
+          <td>Symbiosis Institute of Technology, Nagpur</td>
+        </tr>
+      </table>
+    </section>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>

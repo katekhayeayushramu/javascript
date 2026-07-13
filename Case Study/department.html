@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIT Nagpur - Department</title>
+  <style>
+    :root {
+      --primary: #1f4d7a;
+      --accent: #f7b733;
+      --light: #fafafa;
+      --dark: #102c42;
+      --text: #273444;
+      --surface: rgba(255,255,255,0.92);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.78)), url("sit_bg.jpg") center/cover no-repeat fixed;
+      background-blend-mode: overlay;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-wrapper {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+      padding: 24px 0 36px;
+      opacity: 0;
+      animation: pageFadeIn 0.9s ease 0.2s forwards;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0 16px;
+      flex-wrap: wrap;
+      background: rgba(9, 18, 34, 0.86);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+      animation: fadeInDown 0.8s ease 0.1s both;
+    }
+
+    .site-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.92);
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 999px;
+      transition: background 0.2s ease, color 0.2s ease;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .nav-button {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .site-brand img {
+      width: 120px;
+      max-height: 120px;
+      object-fit: contain;
+      border-radius: 22px;
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
+      background: #ffffff;
+      padding: 12px;
+    }
+
+    .site-brand h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: #fbfbfb;
+      line-height: 1.2;
+    }
+
+    .site-brand p {
+      margin: 6px 0 0;
+      color: #d7e0f2;
+      font-size: 0.98rem;
+    }
+
+    .hero {
+      background: var(--surface);
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: 0 24px 80px rgba(4, 20, 44, 0.18);
+      backdrop-filter: blur(14px);
+      animation: fadeInUp 0.9s ease 0.25s both;
+    }
+
+    .hero-visual {
+      margin: 32px auto 0;
+      min-height: 260px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(31, 77, 122, 0.32), rgba(31, 77, 122, 0.1)), url("sit_bg.jpg") center/cover no-repeat;
+      border: 1px solid rgba(31, 77, 122, 0.12);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.14);
+      position: relative;
+      overflow: hidden;
+      animation: float 8s ease-in-out infinite, fadeIn 1s ease 0.35s both;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.12));
+    }
+
+    .hero-visual__content {
+      position: absolute;
+      bottom: 20px;
+      left: 24px;
+      z-index: 1;
+      max-width: 360px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.05rem;
+      line-height: 1.35;
+      background: rgba(0, 0, 0, 0.32);
+      padding: 14px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .hero h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      margin: 24px auto 0;
+      max-width: 760px;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      color: #4b6377;
+    }
+
+    .cta {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .button,
+    .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 26px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .button {
+      background: linear-gradient(135deg, var(--primary), #32678e);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .button-secondary {
+      background: #ffffff;
+      color: var(--primary);
+      border: 1px solid rgba(31, 77, 122, 0.16);
+    }
+
+    .button:hover,
+    .button-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(31, 77, 122, 0.18);
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      max-width: 320px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.94);
+      color: #fff;
+      font-size: 0.95rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 38px;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 24px;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+      opacity: 0;
+      transform: translateY(22px);
+      animation: fadeInUp 0.8s ease both;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.45s; }
+    .feature-card:nth-child(2) { animation-delay: 0.60s; }
+    .feature-card:nth-child(3) { animation-delay: 0.75s; }
+
+    .feature-card h3 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: #5d7388;
+      line-height: 1.75;
+    }
+
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    footer {
+      margin-top: auto;
+      color: #d7e0f2;
+      text-align: center;
+      padding: 18px 0 10px;
+      font-size: 0.98rem;
+    }
+
+    @media (max-width: 720px) {
+      .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cta {
+        justify-content: stretch;
+      }
+
+      .button,
+      .button-secondary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body id="top" class="department-page">
+  <div class="page-wrapper">
+    <header class="site-header">
+      <div class="site-brand">
+        <img src="sit_logo.png" alt="SIT Nagpur Logo">
+        <div>
+          <h1>Symbiosis Institute of Technology</h1>
+          <p>Computer Science and Engineering Department</p>
+        </div>
+      </div>
+      <nav class="site-nav">
+        <a href="#top" class="nav-link clickable" data-toast="Returning Home...">Home</a>
+        <a href="#highlights" class="nav-link clickable" data-toast="Jumping to Highlights...">Highlights</a>
+        <a href="student.html" class="nav-link nav-button clickable" data-toast="Opening Student Info...">Student Info</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h2>Build the future with AI, Cloud, Data Science and Cyber Security.</h2>
+      <p>The Department of Computer Science and Engineering at SIT Nagpur empowers students with hands-on learning, modern labs and industry-aligned projects for careers in Programming, Artificial Intelligence, Data Science, Cyber Security, Cloud Computing and Software Engineering.</p>
+
+      <div class="cta">
+        <a href="student.html" class="button clickable" data-toast="Opening Student Information...">View Student Information</a>
+        <a href="#highlights" class="button-secondary clickable" data-toast="Exploring Highlights...">Explore Highlights</a>
+      </div>
+
+      <div class="hero-visual" aria-label="Campus background image">
+        <div class="hero-visual__content">Experience our modern labs and campus environment with a focus on tech innovation.</div>
+      </div>
+
+      <div id="highlights" class="hero-grid">
+        <article class="feature-card">
+          <h3>Practical Learning</h3>
+          <p>Project-based labs and campus events give students real experience solving industry problems.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Modern Technology</h3>
+          <p>Students work with AI, cloud platforms, cybersecurity tooling and full-stack software systems.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Student Success</h3>
+          <p>Strong placement support, mentoring and a culture of innovation help learners achieve their goals.</p>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <footer>&copy; 2026 Symbiosis Institute of Technology, Nagpur</footer>
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
