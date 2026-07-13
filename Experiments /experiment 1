@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> internal css</title>
+        <style>
+            h1{
+                color:red;
+                font-size:24px;
+                text-align :center;
+            }
+
+            p{
+                color:blue;
+                font-size:20px;
+                text-align:center;
+            }
+            .btn{
+                display:flex;
+                justify-content:center;
+                align-items:center;
+            }
+            button{
+                background-color:green;
+                color:white;
+                padding:10px;
+                position :absolute;
+                margin: left;
+                border:none;
+                border-radius:5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1> Welcome to internal css</h1>
+        <p>Ayush katekhaye</p>
+        <p>24070521161</p>
+        <div class="btn">
+        <button>click me</button>
+        </div>
+        <br>
+
+
+        <h1>Welcome to inline css</h1>
+        <p>Ayush katekhaye</p>
+        <p>24070521161</p>
+        <div class="btn">
+            <button style="background-color:green;color:white;padding:10px;position:absolute;margin:left;border:none;border-radius:12px;">click me</button>
+        </div>
+
+    </body>
+</html>
